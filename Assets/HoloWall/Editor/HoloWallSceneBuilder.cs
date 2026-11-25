@@ -111,17 +111,16 @@ namespace HoloWall.Editor
             cam.nearClipPlane = 0.05f;
             cam.farClipPlane = 40f;
             camGo.AddComponent<AudioListener>();
-            camGo.AddComponent<ARCameraManager>();
+            var camManager = camGo.AddComponent<ARCameraManager>();
+            // Draw the camera feed first so every virtual object is drawn on top of it.
+            camManager.requestedBackgroundRenderingMode = CameraBackgroundRenderingMode.BeforeOpaques;
             camGo.AddComponent<ARCameraBackground>();
             var camData = camGo.AddComponent<UniversalAdditionalCameraData>();
             camData.renderPostProcessing = false;
             camData.antialiasing = AntialiasingMode.None;
 
-            var pose = camGo.AddComponent<TrackedPoseDriver>();
-            pose.positionInput = new InputActionProperty(new InputAction("Position", InputActionType.Value,
-                "<HandheldARInputDevice>/devicePosition", expectedControlType: "Vector3"));
-            pose.rotationInput = new InputActionProperty(new InputAction("Rotation", InputActionType.Value,
-                "<HandheldARInputDevice>/deviceRotation", expectedControlType: "Quaternion"));
+            // Camera follows the phone via the XR device API (see XRCameraPoseDriver for why).
+            camGo.AddComponent<XRCameraPoseDriver>();
 
             origin.Origin = originGo;
             origin.CameraFloorOffsetObject = offsetGo;
@@ -269,7 +268,7 @@ namespace HoloWall.Editor
             var about = NewOverlay("AboutPanel", canvasGo.transform, out var aboutCard);
             app.aboutPanel = about.gameObject;
             AddCardText(aboutCard, "About HoloWall", 62, Cyan);
-            app.aboutVersionText = AddCardText(aboutCard, "Version 1.0.0", 40, TextDim);
+            app.aboutVersionText = AddCardText(aboutCard, "Version " + HoloWallBuild.Version, 40, TextDim);
             AddCardText(aboutCard, "AR hologram video player", 42, TextMain);
             AddCardText(aboutCard, "Made by Maheshwaran", 48, Violet);
             AddCardText(aboutCard, "github.com/MAHESH21723", 40, Cyan);

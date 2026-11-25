@@ -39,7 +39,7 @@ Made by **Maheshwaran** - [github.com/MAHESH21723](https://github.com/MAHESH2172
   -executeMethod HoloWall.Editor.HoloWallBuild.BuildAndroid
 ```
 
-The APK is written to `Builds/Android/HoloWall-1.0.0.apk` (debug signed, good for sideloading). `HoloWallBuild.SetupProject` can be run alone to regenerate the scene, materials, TMP font, icons and player settings.
+The APK is written to `Builds/Android/HoloWall-<version>.apk` (debug signed, good for sideloading). `HoloWallBuild.SetupProject` can be run alone to regenerate the scene, materials, TMP font, icons and player settings.
 
 ## Project structure
 

@@ -19,14 +19,14 @@ namespace HoloWall.Editor
     /// <summary>
     /// Batch entry points for HoloWall (Made by Maheshwaran).
     ///   SetupProject : creates materials, TMP font, plane prefab, the Main scene and Android player settings.
-    ///   BuildAndroid : runs SetupProject and builds Builds/Android/HoloWall-1.0.0.apk.
+    ///   BuildAndroid : runs SetupProject and builds Builds/Android/HoloWall-<version>.apk.
     /// Run headless, e.g.
     ///   Unity.exe -batchmode -nographics --burst-disable-compilation -quit -buildTarget Android
     ///             -projectPath . -executeMethod HoloWall.Editor.HoloWallBuild.BuildAndroid -logFile build.log
     /// </summary>
     public static class HoloWallBuild
     {
-        public const string Version = "1.0.0";
+        public const string Version = "1.0.1";
         public const string ScenePath = "Assets/Scenes/Main.unity";
         public const string ApkPath = "Builds/Android/HoloWall-" + Version + ".apk";
 
@@ -221,7 +221,7 @@ namespace HoloWall.Editor
             PlayerSettings.productName = "HoloWall";
             PlayerSettings.bundleVersion = Version;
             PlayerSettings.SetApplicationIdentifier(NamedBuildTarget.Android, "com.maheshwaran.holowall");
-            PlayerSettings.Android.bundleVersionCode = 1;
+            PlayerSettings.Android.bundleVersionCode = 2;
 
             PlayerSettings.SetScriptingBackend(NamedBuildTarget.Android, ScriptingImplementation.IL2CPP);
             PlayerSettings.Android.targetArchitectures = AndroidArchitecture.ARM64;
